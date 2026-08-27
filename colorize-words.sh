@@ -7,8 +7,8 @@
 [ -e ~/.claude/hooks/OFF ] && exit 0
 #
 # Each family gets one color, derived from its first form, so inflections of the
-# same word share a hue. Hue comes from a hash of that word; lightness and chroma
-# are pinned, so every color is equally readable and none of them are mud.
+# same word share a hue. Lightness and chroma are pinned, so every color is
+# equally readable and none of them are mud.
 
 # jq -j (not -r) so jq adds no newline of its own; the printf/strip pair below
 # protects the delta's own trailing newlines from command substitution.
@@ -21,7 +21,7 @@ my @families = (
   [qw(survive survives survived surviving)],
   [qw(genuine genuinely)], [qw(seam seams)],     [qw(ladder ladders)],
   [qw(carries carrying)],  [qw(pre-fix)],        [qw(byte-identical)],
-  [qw(halves)],            [qw(refusal refusals)],
+  [qw(halves half)],       [qw(refusal refusals)],  [qw(dropped)],
   [qw(stamped)],           [qw(asserted)],       [qw(deliberately)],
   [qw(untouched)],         [qw(collapse collapses collapsed)],
   [qw(folds folded)],      [qw(loses)],          [qw(loudly)],
@@ -33,6 +33,20 @@ my @families = (
 # House of Leaves prints "house" in blue and "minotaur" in red. These two are
 # quoted rather than derived, so they sit outside the generated palette on purpose.
 my %fixed = (house => "4E8FE8", minotaur => "D63A2F");
+
+# Hues come from evenly spaced slots on the wheel rather than free positions.
+# A family hashes to a preferred slot and probes forward if it is taken, so no
+# two can land closer than one slot apart. Hashing alone clumps: at this many
+# families it produced pairs five RGB points apart, which read as one color.
+my @derived = grep { !$fixed{lc $_->[0]} } @families;
+my $SLOTS = scalar @derived;
+my (@taken, %slot);
+for my $family (@derived) {
+  my $key = lc $family->[0];
+  my $i = unpack("N", md5($key)) % $SLOTS;
+  $i = ($i + 1) % $SLOTS while $taken[$i];
+  ($taken[$i], $slot{$key}) = (1, $i);
+}
 
 # OKLCH -> sRGB. Perceptual lightness, so one L means one brightness at any hue.
 my ($LIGHT, $CHROMA) = (0.78, 0.13);
@@ -61,7 +75,7 @@ for my $family (@families) {
   my $key = lc $family->[0];
   my ($r, $g, $b) = $fixed{$key}
     ? map { hex } ($fixed{$key} =~ /(..)(..)(..)/)
-    : rgb((unpack("N", md5($key)) % 3600) / 3600 * 2 * 3.14159265358979);
+    : rgb($slot{$key} / $SLOTS * 2 * 3.14159265358979);
   $prefix{lc $_} = "\e[38;2;$r;$g;${b}m" for @$family;
 }
 
