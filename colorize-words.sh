@@ -27,7 +27,7 @@ my @families = (
   [qw(folds folded)],      [qw(loses)],          [qw(loudly)],
   [qw(inert)],             [qw(gained)],         [qw(precedent precedents)],
   [qw(alone)],             [qw(ceiling ceilings)],
-  [qw(fan-out fan-outs)],
+  [qw(fan-out fan-outs)],  [qw(worth)],  [qw(honest honestly)],
 );
 
 # House of Leaves prints "house" in blue and "minotaur" in red. These two are
