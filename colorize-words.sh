@@ -16,6 +16,7 @@ delta=$(jq -j '.delta // ""' | perl -0777 -pe '
 use Digest::MD5 qw(md5);
 
 my @families = (
+  [qw(house houses)],      [qw(minotaur minotaurs)],
   [qw(load-bearing)],      [qw(quietly)],        [qw(latent)],
   [qw(survive survives survived surviving)],
   [qw(genuine genuinely)], [qw(seam seams)],     [qw(ladder ladders)],
@@ -28,6 +29,10 @@ my @families = (
   [qw(alone)],             [qw(ceiling ceilings)],
   [qw(fan-out fan-outs)],
 );
+
+# House of Leaves prints "house" in blue and "minotaur" in red. These two are
+# quoted rather than derived, so they sit outside the generated palette on purpose.
+my %fixed = (house => "4E8FE8", minotaur => "D63A2F");
 
 # OKLCH -> sRGB. Perceptual lightness, so one L means one brightness at any hue.
 my ($LIGHT, $CHROMA) = (0.78, 0.13);
@@ -53,8 +58,10 @@ sub rgb {
 
 my %prefix;
 for my $family (@families) {
-  my $hue = (unpack("N", md5(lc $family->[0])) % 3600) / 3600 * 2 * 3.14159265358979;
-  my ($r, $g, $b) = rgb($hue);
+  my $key = lc $family->[0];
+  my ($r, $g, $b) = $fixed{$key}
+    ? map { hex } ($fixed{$key} =~ /(..)(..)(..)/)
+    : rgb((unpack("N", md5($key)) % 3600) / 3600 * 2 * 3.14159265358979);
   $prefix{lc $_} = "\e[38;2;$r;$g;${b}m" for @$family;
 }
 

@@ -59,6 +59,10 @@ fire inside `seamless`, and a plural needs listing explicitly.
 
 ## How the colors are picked
 
+Two are quoted rather than derived. `%fixed` maps a family to a literal hex, and
+`house` and `minotaur` use it — House of Leaves prints those two in blue and red,
+and the point of a reference is that it is exact.
+
 Hue comes from an MD5 of the row's first word; lightness and chroma are fixed in
 OKLCH and converted to sRGB. Pinning perceptual lightness is what keeps the blues
 from going muddy while the yellows glare — at a fixed HSL lightness they would.
