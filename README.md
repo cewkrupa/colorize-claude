@@ -4,7 +4,7 @@ I was getting annoyed at reading about load bearing seams. Everything I've tried
 
 What if instead of trying to get Claude to talk different, I just make it easier to read? Syntax highlighting is a thing in regular programming languages, and it usually helps. 
 
-Anyways, this is a hook for Claude Code that colorizes the top 30 or so words & their variations from https://louisabraham.github.io/load-bearing/. It uses `jq` and `perl`. There's a bonus House of Leaves joke too. 
+Anyways, this is a hook for Claude Code that colorizes the top 30 or so words & their variations from https://louisabraham.github.io/load-bearing/. It uses `jq` and `perl`, and I've tested it in Ghostty. There's a bonus House of Leaves joke too. 
 
 Ask Claude to repeat this sentence to see it in action:
 
