@@ -1,8 +1,18 @@
 # colorize-words
 
+I was getting annoyed at reading about load bearing seams. Everything I've tried is just papering over the underlying problem: this is how Claude thinks. You can tell it to stop, or use simple english, or whatever, but they still sneak through.
+
+What if instead of trying to get Claude to talk different, I just make it easier to read? Syntax highlighting is a thing in regular programming languages, and it usually helps. 
+
+Anyways, this is a hook for Claude Code that colorizes the top 30 or so words & their variations from https://louisabraham.github.io/load-bearing/. It uses `jq` and `perl`. There's a bonus House of Leaves joke too.
+
+----
+
+🤖 From here on out, it's Claude Opus 5 talking, so keep that in mind. 🤖
+
 A Claude Code `MessageDisplay` hook that tints a chosen vocabulary in Claude's
 replies as they stream. Useful for noticing how often a word shows up — the
-terminal equivalent of syntax highlighting for your own tics.
+terminal equivalent of syntax highlighting.
 
 It is display-only. The stored transcript and what the model sees are unaffected,
 so nothing here changes what Claude writes, only what you see.
