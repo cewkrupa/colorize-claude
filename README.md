@@ -32,7 +32,7 @@ every invocation, so the toggle is immediate.
 To remove it entirely rather than pause it, delete the `hooks` block from
 `~/.claude/settings.json`. That one needs a restart.
 
-## Install
+## Install (not tested, but probably works)
 
 ```sh
 cp colorize-words.sh ~/.claude/hooks/
