@@ -1,10 +1,14 @@
-# colorize-words
+# colorize-claude
 
 I was getting annoyed at reading about load bearing seams. Everything I've tried is just papering over the underlying problem: this is how Claude thinks. You can tell it to stop, or use simple english, or whatever, but they still sneak through.
 
 What if instead of trying to get Claude to talk different, I just make it easier to read? Syntax highlighting is a thing in regular programming languages, and it usually helps. 
 
-Anyways, this is a hook for Claude Code that colorizes the top 30 or so words & their variations from https://louisabraham.github.io/load-bearing/. It uses `jq` and `perl`. There's a bonus House of Leaves joke too.
+Anyways, this is a hook for Claude Code that colorizes the top 30 or so words & their variations from https://louisabraham.github.io/load-bearing/. It uses `jq` and `perl`. There's a bonus House of Leaves joke too. 
+
+Ask Claude to repeat this sentence to see it in action:
+
+> We deliberately built a genuine, load-bearing ladder that quietly carries the house's ceiling — and though the minotaur's halves collapsed and folded loudly, the seam stayed untouched, byte-identical, an honest, inert precedent nobody dropped, stamped, or asserted a refusal against. Worth every fan-out, gained alone, never lost — and let's be honest, that survived.
 
 ----
 
@@ -35,8 +39,8 @@ To remove it entirely rather than pause it, delete the `hooks` block from
 ## Install (not tested, but probably works)
 
 ```sh
-cp colorize-words.sh ~/.claude/hooks/
-chmod +x ~/.claude/hooks/colorize-words.sh
+cp colorize-claude.sh ~/.claude/hooks/
+chmod +x ~/.claude/hooks/colorize-claude.sh
 ```
 
 Then in `~/.claude/settings.json`:
@@ -46,7 +50,7 @@ Then in `~/.claude/settings.json`:
   "hooks": {
     "MessageDisplay": [
       { "hooks": [ { "type": "command",
-                     "command": "/Users/you/.claude/hooks/colorize-words.sh" } ] }
+                     "command": "/Users/you/.claude/hooks/colorize-claude.sh" } ] }
     ]
   }
 }
