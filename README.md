@@ -10,6 +10,8 @@ Ask Claude to repeat this sentence to see it in action:
 
 > We deliberately built a genuine, load-bearing ladder that quietly carries the house's ceiling — and though the minotaur's halves collapsed and folded loudly, the seam stayed untouched, byte-identical, an honest, inert precedent nobody dropped, stamped, or asserted a refusal against. Worth every fan-out, gained alone, never lost — and let's be honest, that survived.
 
+<img width="1102" height="187" alt="image" src="https://github.com/user-attachments/assets/a78ee345-820f-4394-a681-a6a3900a7c49" />
+
 ----
 
 🤖 From here on out, it's Claude Opus 5 talking, so keep that in mind. 🤖
